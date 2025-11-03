@@ -1,0 +1,76 @@
+# seed_everything: 1234
+max_epochs: 50000
+logger:
+  name: v20240304
+
+# optimizer:
+#   class_path: torch.optim.adam.Adam
+#   init_args:
+#     lr: 0.001
+# lr_scheduler:
+#   class_path: pytorch_lightning.cli.ReduceLROnPlateau
+#   init_args:
+#     factor: 0.1
+#     monitor: train/loss
+
+trainer:
+  accelerator: gpu
+  devices: 1
+  max_epochs: -1
+  inference_mode: false
+  callbacks:
+    # - class_path: pytorch_lightning.callbacks.ModelCheckpoint
+    - class_path: neurg.l_utils.callbacks.BestCkpt
+      init_args:
+        save_last: true
+        monitor: val/loss
+        save_on_train_epoch_end: false
+        save_top_k: 1
+        every_n_epochs: 500
+    - class_path: lightning.pytorch.callbacks.LearningRateMonitor
+      init_args:
+        logging_interval: epoch
+    - class_path: neurg.l_utils.callbacks.InfoLogging
+
+  # profiler: simple
+  log_every_n_steps: 50
+  check_val_every_n_epoch: 500
+  # limit_val_batches: 0
+  # val_check_batch: 10
+  # gradient_clip_val: 1.0
+  precision: 32
+  # logger:
+  #   class_path: neurg.l_utils.loggers.MyWbLogger
+  #   init_args:
+  #     project: neurg
+  #     name: debug/v0
+  #     log_model: true
+  #     group: ros_coll
+  #     save_dir: lightning_logs
+  #     job_type: train
+  logger:
+    class_path: neurg.l_utils.loggers.MyTBLogger
+    # class_path: lightning.pytorch.loggers.TensorBoardLogger
+    init_args:
+      save_dir: lightning_logs
+      name: debug
+
+model:
+  class_path: neurg.net.l_model_linksdf.LinkSdfLModel
+  init_args:
+    hid_dim: 32
+    hid_size: 3
+    eikonal_weight: 0.001
+    # cur_exp_max_epoch: 10
+
+data:
+  class_path: neurg.net.l_model_linksdf.LinkSdfDataModule
+  init_args:
+    shuffle: false
+    data_dir: logs/nsdf/dataset/splited
+    link_name: link0
+    precision: ${trainer.precision}
+    # batch_size: 2400000
+    # total train dataset: 500000 * 0.9=450000
+    batch_size: 450000  # 3G GPU for 64x3
+    num_workers: 0

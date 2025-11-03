@@ -1,0 +1,14 @@
+{
+    "mesh_dir": "logs/nsdf/dataset/meshes",
+    "link_meshs": [
+        "link0.obj",
+        "link1.obj",
+        "link2.obj",
+        "link3.obj",
+        "link4.obj",
+        "link5.obj",
+        "link6.obj",
+        "link7.obj",
+        "hand.obj"
+    ]
+}
