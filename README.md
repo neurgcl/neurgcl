@@ -2,7 +2,11 @@
 
 This repository provides the PyTorch implementation of **NeuRGCL** (referred to as **NSDF** in the code). The CUDA-accelerated implementation of NeuRGCL will be made publicly available upon acceptance.
 
-🎞️ A demo of the collision-avoidance experiments in simulation and on a real robot can be found in this [video](https://drive.google.com/file/d/1b4E_DCML_1zI4wbJf9qqz-QfmVTWYPks/view?usp=drive_link).
+## 🎞️ Video
+
+A demo of the collision-avoidance experiments in simulation and on a real robot can be found [here](https://drive.google.com/file/d/1b4E_DCML_1zI4wbJf9qqz-QfmVTWYPks/view?usp=drive_link).
+[![NeuRGCL_experiments.mp4](https://github.com/user-attachments/assets/ac1087dc-bbc1-4f6a-b9ab-744adae043c9)](https://drive.google.com/file/d/1b4E_DCML_1zI4wbJf9qqz-QfmVTWYPks/view?usp=drive_link)
+
 
 ## 1. Setup environment
 
